@@ -1,7 +1,5 @@
 import $ from 'jquery';
 import _ from 'lodash';
-import '../css/main.css';
-import '../assets/holberton-logo.jpg'
 
 
 let count = 0;
