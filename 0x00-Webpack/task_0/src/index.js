@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $ from "jquery";
 
 const firstParagraph = $('<p>Holberton Dashboard</p>');
 const secondParagraph = $('<p>Dashboard data for the students</p>');
