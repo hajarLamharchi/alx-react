@@ -9,6 +9,9 @@ module.exports = {
         path: path.resolve(__dirname, 'public'),
         filename: 'bundle.js'
     },
+    performance: {
+        hints: false,
+    },
     module: {
         rules: [
             {
