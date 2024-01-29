@@ -18,7 +18,9 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     plugins: [
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            filename: './index.html',
+        }),
         new CleanWebpackPlugin()
     ],
     optimization: {
