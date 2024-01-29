@@ -29,6 +29,8 @@ module.exports = {
         },
     },
     devServer: {
+        static: path.join(__dirname, './public'),
+        compress: true,
         port: 8564,
     },
     module: {
