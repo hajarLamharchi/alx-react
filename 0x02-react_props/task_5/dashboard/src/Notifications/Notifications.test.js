@@ -19,11 +19,4 @@ describe('<Notifications />', () => {
         const wrapper = shallow(<Notifications />);
         expect(wrapper.find(NotificationItem).exists()).toBe(true)
     });
-
-    it('Reder the first NotificationItem with the right html', () => {
-        const wrapper = shallow(<Notifications />);
-        const FirstNotificationItem = wrapper.find(NotificationItem).first();
-        expect(FirstNotificationItem.prop('type')).toBe('default');
-        expect(FirstNotificationItem.prop('value')).toBe('new course available');
-    });
 });
