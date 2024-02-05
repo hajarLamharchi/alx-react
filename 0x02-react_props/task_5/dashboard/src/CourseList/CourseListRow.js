@@ -1,4 +1,6 @@
+import { checkPropTypes } from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const CourseListRow = ({isHeader, textFirstCell, textSecondCell}) => {
     if (isHeader) {
@@ -20,6 +22,17 @@ const CourseListRow = ({isHeader, textFirstCell, textSecondCell}) => {
             <td>{ textSecondCell }</td>
         </>
     }
+}
+
+CourseListRow.prototype = {
+    isHeader: checkPropTypes.bool,
+    textFirstCell: PropTypes.string.isRequired,
+    textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+CourseListRow.defaultProps = {
+    isHeader: false,
+    textSecondCell: null,
 }
 
 export default CourseListRow

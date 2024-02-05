@@ -18,7 +18,7 @@ function NotificationItem({type, html, value}) {
   
   return (
     // eslint-disable-next-line
-    <li data-notification-type={type} dangerouslySetInnerHTML={html}>{value}</li>
+    <li data-notification-type={type} dangerouslySetInnerHTML={{ __html: html }}>{value}</li>
   );
 }
 
