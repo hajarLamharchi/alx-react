@@ -6,7 +6,9 @@ const CourseListRow = ({isHeader, textFirstCell, textSecondCell}) => {
     if (isHeader === true) {
         if (textSecondCell === null || textSecondCell === undefined) {
             return (
-                <th colSpan={2}>{ textFirstCell }</th>
+                <tr>
+                    <th colSpan={2}>{ textFirstCell }</th>
+                </tr>
             )
         } else {
             return (
