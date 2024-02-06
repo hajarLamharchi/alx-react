@@ -25,7 +25,7 @@ class App extends Component {
     isLoggedIn: PropTypes.bool,
   };
   static defaultProps = {
-    isLoggedIn: true,
+    isLoggedIn: false,
   };
   
   render() {
