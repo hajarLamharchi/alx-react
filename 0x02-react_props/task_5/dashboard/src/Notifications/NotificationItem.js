@@ -17,8 +17,11 @@ NotificationItem.defaultProps = {
 function NotificationItem({type, html, value}) {
   
   return (
-    // eslint-disable-next-line
-    <li data-notification-type={type} dangerouslySetInnerHTML={{ __html: html }}>{value}</li>
+    <>
+      { type && value ? <li data-notification-type={type}>{value}</li> : null }
+      { html ? <li data-notification-type={type} data-urgent dangerouslySetInnerHTML={{ __html: html }}></li> : null }
+    </>
+    
   );
 }
 

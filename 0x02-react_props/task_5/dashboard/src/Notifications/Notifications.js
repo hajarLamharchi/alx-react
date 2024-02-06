@@ -8,11 +8,8 @@ import NotificationItemShape from './NotificationItemShape';
 
 function Notifications({displayDrawer, listNotifications}) {
     return (
-        <>
-            <div className='menuItem'>
-            Your notifications
-            </div>
-            if (displayDrawer) {
+        <div className='placing'> 
+            { displayDrawer ? (
                 <div className='Notifications'>
                 <button style={{ position: "absolute",
                         top: 20,
@@ -26,17 +23,19 @@ function Notifications({displayDrawer, listNotifications}) {
                 </button>
                 <p>Here is the list of notifications</p>
                 <ul>
-                   {listNotifications && listNotifications.length > 0 ? (
+                {listNotifications && listNotifications.length > 0 ? (
                     listNotifications.map(({id, type, html, value}) => <NotificationItem key={id} type={type} html={html} value={value} />
-                   )) : (
+                )) : (
                     <NotificationItem value="No new notification for now" />
-                   )};
+                )};
                 </ul>
             </div>
-            }
-            
-            
-        </>
+            ) : (
+                <div className='menuItem'>
+                    Your notifications
+                </div>
+            ) }   
+        </div>
     );
 }
 
