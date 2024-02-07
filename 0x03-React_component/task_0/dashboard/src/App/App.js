@@ -27,7 +27,7 @@ class App extends Component {
   };
   static defaultProps = {
     isLoggedIn: false,
-    logOut: () => {},
+    logOut: () => {return;},
   };
 
   componentDidMount() {
