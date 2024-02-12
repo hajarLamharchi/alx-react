@@ -3,6 +3,10 @@ import { shallow } from "enzyme";
 import CourseListRow from "./CourseListRow";
 
 describe('CourseListRow', () => {
+    it('should render without crashing', () => {
+        shallow(<CourseListRow />);
+    });
+
     it('CourseListRow renders one cell with colspan = 2 when textSecondCell does not exist', () => {
         const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Available courses" />);
         expect(wrapper.find('th').prop("colSpan")).toBe(2);
