@@ -29,8 +29,8 @@ const CourseListRow = ({isHeader, textFirstCell, textSecondCell}) => {
     else {
         return (
         <tr style={ rowColor }>
-            <th>{ textFirstCell }</th>
-            <th>{ textSecondCell }</th>
+            <td>{ textFirstCell }</td>
+            <td>{ textSecondCell }</td>
         </tr>
         )
     }
