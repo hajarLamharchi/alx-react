@@ -9,12 +9,13 @@ class Notifications extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayDrawer: false
+      drawer: false
     }
 
-    this.isDisplayed = this.isDisplayed.bind(this);
-    this.isHidden = this.isHidden.bind(this);
-    }
+    this.func1 = this.func1.bind(this);
+    this.func2 = this.func2.bind(this);
+
+  }
 
   static propTypes = {
     displayDrawer: PropTypes.bool,
@@ -30,37 +31,29 @@ class Notifications extends Component {
     handleHideDrawer: () => {},
   };
 
+  func1() {
+    this.setState({
+      drawer: true,
+    })
+  }
+  func2() {
+    this.setState({
+      drawer: false,
+    })
+  }
+
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   };
 
-  isDisplayed() {
-    this.props.handleDisplayDrawer();
-        this.setState(prevState => ({
-            displayDrawer: true
-        }));
-  }
-
-  isHidden() {
-    this.props.handleDisplayDrawer();
-        this.setState(prevState => ({
-            displayDrawer: false
-        }));
-  }
-
-  shouldComponentUpdate = (nextProps, nextState) => {
-    if (nextProps.listNotifications.length > this.props.listNotifications.length ||
-      this.state.displayDrawer !== nextState.displayDrawer){
-        return true;
-      }
-    return false;
+  shouldComponentUpdate = (nextProps) => {
+    return nextProps.listNotifications.length > this.props.listNotifications.length;
   }
 
   render() {
-    const { listNotifications } = this.props;
     return (
       <div className={css(styles.placing)}>
-        {this.state.displayDrawer ? (
+        {this.state.drawer ? (
           <div className={css(styles.NotificationSyle)}>
             
             <button
@@ -72,16 +65,14 @@ class Notifications extends Component {
                 background: "transparent",
               }}
               aria-label="Close"
-              onClick={() => {
-                console.log("Close button has been clicked");
-              }}
+              onClick={this.func1}
             >
               <img src={closeIcon} alt="close-icon" width={"10px"} />
             </button>
             <p>Here is the list of notifications</p>
             <ul>
-              {listNotifications && listNotifications.length > 0 ? (
-                listNotifications.map((val, idx) => (
+              {this.props.listNotifications && this.props.listNotifications.length > 0 ? (
+                this.props.listNotifications.map((val, idx) => (
                   <NotificationItem
                     key={val.id}
                     type={val.type}
@@ -97,7 +88,7 @@ class Notifications extends Component {
             </ul>
           </div>
         ) : (
-          <div className={css(styles.menuItem)}>Your notifications</div>
+          <div onClick={this.func2} className={css(styles.menuItem)}>Your notifications</div>
         )}
       </div>
     );

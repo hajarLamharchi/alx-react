@@ -37,9 +37,9 @@ class App extends Component {
     this.state = {
       displayDrawer: false
     }
-
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
+
   }
 
   static propTypes = {
@@ -48,19 +48,21 @@ class App extends Component {
   };
   static defaultProps = {
     isLoggedIn: false,
-    logOut: () => {},
+    logOut: () => { },
   };
 
   handleDisplayDrawer() {
-    this.setState(prevState => ({
+    this.setState({
       displayDrawer: true
-    }));
+    })
+    console.log("hello")
   }
 
   handleHideDrawer() {
-    this.setState(prevState => ({
+    this.setState({
       displayDrawer: false
-    }));
+    })
+    console.log("arigato")
   }
 
   componentDidMount() {
@@ -82,10 +84,10 @@ class App extends Component {
     const { isLoggedIn } = this.props;
     return (
       <div className={css(styles.App)}>
-        <Notifications listNotifications={listNotifications} 
-                        displayDrawer={this.state.displayDrawer}
-                        handleDisplayDrawer={this.handleDisplayDrawer}
-                        handleHideDrawer={this.handleHideDrawer}/>
+        <Notifications listNotifications={listNotifications}
+          displayDrawer={this.state.displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer} />
         <Header />
         {isLoggedIn ? (
           <BodySectionWithMarginBottom title="Course list">
@@ -98,10 +100,10 @@ class App extends Component {
         )}
         <BodySection title="News from the School">
           <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </BodySection>
         <Footer />
