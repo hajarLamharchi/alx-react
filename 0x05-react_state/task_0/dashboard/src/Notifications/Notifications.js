@@ -11,7 +11,10 @@ class Notifications extends Component {
     this.state = {
       displayDrawer: false
     }
-  }
+
+    this.isDisplayed = this.isDisplayed.bind(this);
+    this.isHidden = this.isHidden.bind(this);
+    }
 
   static propTypes = {
     displayDrawer: PropTypes.bool,
@@ -31,8 +34,26 @@ class Notifications extends Component {
     console.log(`Notification ${id} has been marked as read`);
   };
 
-  shouldComponentUpdate = (nextProps) => {
-    return nextProps.listNotifications.length > this.props.listNotifications.length;
+  isDisplayed() {
+    this.props.handleDisplayDrawer();
+        this.setState(prevState => ({
+            displayDrawer: true
+        }));
+  }
+
+  isHidden() {
+    this.props.handleDisplayDrawer();
+        this.setState(prevState => ({
+            displayDrawer: false
+        }));
+  }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (nextProps.listNotifications.length > this.props.listNotifications.length ||
+      this.state.displayDrawer !== nextState.displayDrawer){
+        return true;
+      }
+    return false;
   }
 
   render() {
