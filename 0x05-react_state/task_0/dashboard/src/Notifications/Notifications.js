@@ -8,38 +8,8 @@ import { StyleSheet, css } from "aphrodite";
 class Notifications extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      drawer: false
-    }
 
-    this.func1 = this.func1.bind(this);
-    this.func2 = this.func2.bind(this);
-
-  }
-
-  static propTypes = {
-    displayDrawer: PropTypes.bool,
-    listNotifications: PropTypes.arrayOf(NotificationItemShape),
-    handleDisplayDrawer: PropTypes.func,
-    handleHideDrawer: PropTypes.func,
-  };
-
-  static defaultProps = {
-    displayDrawer: false,
-    listNotifications: [],
-    handleDisplayDrawer: () => {},
-    handleHideDrawer: () => {},
-  };
-
-  func1() {
-    this.setState({
-      drawer: true,
-    })
-  }
-  func2() {
-    this.setState({
-      drawer: false,
-    })
+    this.markAsRead = this.markAsRead.bind(this);
   }
 
   markAsRead = (id) => {
@@ -47,13 +17,13 @@ class Notifications extends Component {
   };
 
   shouldComponentUpdate = (nextProps) => {
-    return nextProps.listNotifications.length > this.props.listNotifications.length;
+    return nextProps.length > this.props.listNotifications.length;
   }
 
   render() {
     return (
       <div className={css(styles.placing)}>
-        {this.state.drawer ? (
+        {this.props.displayDrawer? (
           <div className={css(styles.NotificationSyle)}>
             
             <button
@@ -65,7 +35,12 @@ class Notifications extends Component {
                 background: "transparent",
               }}
               aria-label="Close"
-              onClick={this.func1}
+              onClick={
+                (e) => {
+                  console.log("Close button has been clicked");
+                  this.props.handleHideDrawer();
+                }
+              }
             >
               <img src={closeIcon} alt="close-icon" width={"10px"} />
             </button>
@@ -88,7 +63,8 @@ class Notifications extends Component {
             </ul>
           </div>
         ) : (
-          <div onClick={this.func2} className={css(styles.menuItem)}>Your notifications</div>
+          <div onClick={(e) => {this.props.handleDisplayDrawer();
+          console.log("show notifications")}} className={css(styles.menuItem)}>Your notifications</div>
         )}
       </div>
     );
@@ -158,5 +134,19 @@ const styles = StyleSheet.create({
     },
   }
 })
+
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
+};
+
+Notifications.defaultProps = {
+  displayDrawer: false,
+  listNotifications: [],
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
+};
 
 export default Notifications;

@@ -47,4 +47,5 @@ describe("<App />", () => {
   expect(spy).toHaveBeenCalledWith("Logging you out");
   wrapper.unmount();
   });
+
 });
