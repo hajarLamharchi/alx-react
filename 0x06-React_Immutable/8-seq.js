@@ -1,8 +1,7 @@
 import { Seq } from 'immutable';
 
 const printBestStudents = (object) => {
-    const lazySeq = Seq(object);
-    lazySeq
+    const lazySeq = Seq(object)
     .filter((student) => student.get('score') >= 70)
     .map((student) => student.update('firstName', firstName => firstName.charAt(0).toUpperCase() + firstName.slice(1))
     .update('lastName', lastName => lastName.charAt(0).toUpperCase() + lastName.slice(1)));
