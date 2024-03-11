@@ -30,7 +30,6 @@ class App extends Component {
     this.state = {
       displayDrawer: false,
       user: user,
-      logOut: this.logOut,
       listNotifications: [
         { id: 1, type: "default", value: "New course available" },
         { id: 2, type: "urgent", value: "New resume available" },
@@ -38,7 +37,6 @@ class App extends Component {
       ]
     };
     this.keydownEvent = this.keydownEvent.bind(this);
-    this.logIn = this.logIn.bind(this);
   }
 
   listCourses = [
@@ -63,32 +61,24 @@ class App extends Component {
     }
   };
 
-  logIn(email, password) {
-    this.setState({
-      user: {
-        email,
-        password
-      },
-      isLoggedIn: true
-    })
-  }
-
-  logOut = () => {
-    this.setState({
-      user: user,
-    })
-  }
-
   markNotificationAsRead = (id) => {
     const newNotifList = this.state.listNotifications.filter((notification) => notification.id !== id);
     this.setState({ listNotifications: newNotifList });
   }
 
   render() {
+    const {
+      isLoggedIn,
+      displayDrawer,
+      displayNotificationDrawer,
+      hideNotificationDrawer,
+      login,
+      logout,
+    } = this.props;
     return (
       <AppContext.Provider value={{
         user: this.state.user,
-        logOut: this.state.logOut
+        logOut: logout
       }}>
         <div className={css(styles.App)}>
           <Notifications listNotifications={this.state.listNotifications}
@@ -97,13 +87,13 @@ class App extends Component {
             handleHideDrawer={hideNotificationDrawer}
             markNotificationAsRead={this.markNotificationAsRead} />
           <Header />
-          {this.state.user.isLoggedIn ? (
+          {isLoggedIn ? (
             <BodySectionWithMarginBottom title="Course list">
               <CourseList listCourses={this.listCourses} />
             </BodySectionWithMarginBottom>
           ) : (
             <BodySectionWithMarginBottom title="Log in to continue">
-              <Login logIn={this.logIn} />
+              <Login logIn={login} />
             </BodySectionWithMarginBottom>
           )}
           <BodySection title="News from the School">
@@ -148,6 +138,8 @@ export const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
+  login: loginRequest,
+  logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
