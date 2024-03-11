@@ -1,11 +1,9 @@
 import React from 'react';
 import { getFullYear, getFooterCopy } from '../utils/utils';
 import './Footer.css';
-import { AppContext } from '../App/AppContext'
 
 
-const Footer = () => {
-  const { user } = React.useContext(AppContext);
+export const Footer = ({ user }) => {
   return (
     <div className="App-footer">
       <p>Copyright {getFullYear()} - {getFooterCopy()}</p>
@@ -17,4 +15,19 @@ const Footer = () => {
   )
 }
 
-export default Footer;
+Footer.defaultProps = {
+  user: null,
+};
+
+Footer.propTypes = {
+  user: PropTypes.object,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.get("user"),
+  };
+}
+
+// export default Footer;
+export default connect(mapStateToProps, null)(Footer);
