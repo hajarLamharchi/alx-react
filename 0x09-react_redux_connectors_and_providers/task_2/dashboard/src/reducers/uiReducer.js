@@ -24,6 +24,12 @@ const uiReducer = (state = Map(initialState), action) => {
         case actions.LOGOUT: {
             return state.set('isUserLoggedIn', false);
         }
+        case actions.LOGIN: {
+            return state.set("user", action.user);
+        }
+        case actions.LOGOUT: {
+            return state.set("isUserLoggedIn", false).set("user", null);
+        }
         default: {
             return state;
         }
