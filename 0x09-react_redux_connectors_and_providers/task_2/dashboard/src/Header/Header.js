@@ -1,11 +1,11 @@
 import React from 'react';
 import logo from '../assets/holberton-logo.jpg';
 import { StyleSheet, css } from "aphrodite";
-import { AppContext } from '../App/AppContext';
+import { logout } from '../actions/uiActionCreators';
 
 
 const Header = () => {
-  const { user, logOut } = React.useContext(AppContext);
+  const { user, logout } = this.props;
   return (
     <>
       <div className={css(styles.AppHeader)}>
@@ -17,7 +17,7 @@ const Header = () => {
                     Welcome<strong> {user.email} </strong>
                     <em>
                       {/* eslint-disable-next-line */}
-                        <a href="#" onClick={logOut}>
+                        <a href="#" onClick={logout}>
                             (logout)
                         </a>
                     </em>
@@ -44,4 +44,28 @@ const styles = StyleSheet.create({
     marginLeft: '20px'
 }
 })
-export default Header;
+
+Header.defaultProps = {
+  user: null,
+  logout: () => {},
+};
+
+Header.propTypes = {
+  user: PropTypes.object,
+  logout: PropTypes.func,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.get("user"),
+  };
+};
+
+const mapDispatchToProps = {
+  logout,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+// export default Header;
