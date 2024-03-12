@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App/App';
 import reportWebVitals from './reportWebVitals';
-import uiReducer, { initialState } from "./reducers/uiReducer";
+import rootReducer, { initialState } from "./reducers/rootReducer";
 import { thunk } from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  uiReducer,
+  combineReducers(rootReducer),
   Map(initialState),
   composeEnhancers(applyMiddleware(thunk))
 );
